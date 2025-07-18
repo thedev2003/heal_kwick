@@ -1,23 +1,48 @@
-// This file defines the columns for the Patient data table.
-// It's kept separate to allow the DataTable to be reusable.
+'use client';
 
+// Patient columns definition (unchanged)
 export const patientColumns = [
+	//...
+];
+
+// New Appointment columns definition
+export const appointmentColumns = [
 	{
-		header: 'Name',
-		accessorKey: 'name',
+		header: 'Patient Name',
+		accessorKey: 'patient.name', // Access nested data from the populated field
 	},
 	{
-		header: 'Email',
-		accessorKey: 'email',
+		header: 'Reason',
+		accessorKey: 'reason',
 	},
 	{
-		header: 'Phone',
-		accessorKey: 'phone',
+		header: 'Scheduled Date',
+		accessorKey: 'schedule',
+		cell: ({ row }) => new Date(row.original.schedule).toLocaleString(), // Custom cell renderer for formatting
 	},
 	{
-		header: 'Registration Date',
-		accessorKey: 'createdAt',
-		// In a real app, you could add a `cell` function here
-		// to format the date nicely, e.g., new Date(value).toLocaleDateString()
+		header: 'Status',
+		accessorKey: 'status',
+	},
+];
+
+// A simpler column set for when a patient views their own appointments
+export const patientAppointmentColumns = [
+	{
+		header: 'Reason',
+		accessorKey: 'reason',
+	},
+	{
+		header: 'Physician',
+		accessorKey: 'primaryPhysician',
+	},
+	{
+		header: 'Scheduled Date',
+		accessorKey: 'schedule',
+		cell: ({ row }) => new Date(row.original.schedule).toLocaleString(),
+	},
+	{
+		header: 'Status',
+		accessorKey: 'status',
 	},
 ];

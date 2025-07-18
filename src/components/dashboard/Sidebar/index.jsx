@@ -17,6 +17,11 @@ export default function Sidebar() {
 							Manage Patients
 						</Link>
 					</li>
+					<li className="mb-4">
+						<Link href="/admin/appointments" className="hover:text-blue-300">
+							Manage Appointments
+						</Link>
+					</li>
 					{/* Add more links as needed */}
 				</ul>
 			</nav>
