@@ -1,21 +1,20 @@
-import Image from "next/image";
-import LoginForm from "@/components/forms/LoginForm";
+import { LoginForm } from '@/components/auth/LoginForm';
+import AuthLayout from '@/components/layout/AuthLayout';
+import Link from 'next/link';
 
 export default function LoginPage() {
-  return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="flex flex-col items-center mb-8">
-        <Image
-          src="/health-logo.svg"
-          alt="Health Monitor Logo"
-          width={180}
-          height={38}
-          priority
-          className="mb-6"
-        />
-        <h2 className="text-2xl font-bold">Sign in to your account</h2>
-      </div>
-      <LoginForm />
-    </div>
-  );
+	return (
+		<AuthLayout>
+			<div className="text-center">
+				<h1 className="text-2xl font-bold">Welcome Back</h1>
+				<p className="text-gray-500">
+					Don&apos;t have an account?{' '}
+					<Link href="/register" className="text-blue-500 hover:underline">
+						Sign up
+					</Link>
+				</p>
+			</div>
+			<LoginForm />
+		</AuthLayout>
+	);
 }
