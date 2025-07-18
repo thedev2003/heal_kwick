@@ -1,5 +1,13 @@
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 import twilio from 'twilio';
 
+// NEW: cn utility for shadcn/ui
+export function cn(...inputs) {
+	return twMerge(clsx(inputs))
+}
+
+// --- Existing Twilio Logic ---
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const twilioPhoneNumber = process.env.TWILIO_PHONE_NUMBER;
@@ -17,8 +25,6 @@ export async function sendSms(to, body) {
 		return message;
 	} catch (error) {
 		console.error('Failed to send SMS:', error);
-		// In a real app, you might want to throw the error
-		// or handle it in a more sophisticated way.
 		return null;
 	}
 }

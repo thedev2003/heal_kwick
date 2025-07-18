@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function LoginForm() {
 	const [email, setEmail] = useState('');
@@ -23,8 +27,8 @@ export function LoginForm() {
 			});
 
 			if (res.ok) {
-				router.push('/admin'); // Redirect to a protected dashboard page
-				router.refresh(); // Refresh to update server-side auth state
+				router.push('/admin');
+				router.refresh();
 			} else {
 				const data = await res.json();
 				setError(data.message || 'Login failed.');
@@ -37,14 +41,27 @@ export function LoginForm() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-4">
-			{/* We will replace these with shadcn/ui components later */}
-			<input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full px-3 py-2 border rounded-md" />
-			<input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full px-3 py-2 border rounded-md" />
-			<button type="submit" disabled={isLoading} className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 disabled:bg-gray-400">
-				{isLoading ? 'Logging In...' : 'Login'}
-			</button>
-			{error && <p className="text-sm text-center text-red-500">{error}</p>}
-		</form>
+		<Card>
+			<CardHeader>
+				<CardTitle>Login</CardTitle>
+				<CardDescription>Enter your credentials to access your account.</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<form onSubmit={handleSubmit} className="space-y-4">
+					<div className="space-y-2">
+						<Label htmlFor="email">Email</Label>
+						<Input id="email" type="email" placeholder="m@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="password">Password</Label>
+						<Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+					</div>
+					<Button type="submit" disabled={isLoading} className="w-full">
+						{isLoading ? 'Logging In...' : 'Login'}
+					</Button>
+					{error && <p className="text-sm text-center text-red-500">{error}</p>}
+				</form>
+			</CardContent>
+		</Card>
 	);
 }
