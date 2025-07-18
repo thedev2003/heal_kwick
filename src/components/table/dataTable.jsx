@@ -1,8 +1,5 @@
 'use client';
 
-// This is a simplified DataTable component.
-// In a real app, you'd use a library like TanStack Table for features
-// like sorting, filtering, and pagination.
 export function DataTable({ columns, data }) {
 	if (!data || data.length === 0) {
 		return <p>No data available.</p>;
@@ -28,8 +25,13 @@ export function DataTable({ columns, data }) {
 					{data.map((row) => (
 						<tr key={row._id}>
 							{columns.map((column) => (
-								<td key={column.accessorKey} className="px-6 py-4 whitespace-nowrap">
-									<div className="text-sm text-gray-900">{row[column.accessorKey]}</div>
+								<td key={column.header} className="px-6 py-4 whitespace-nowrap">
+									{/* LOGIC CHANGE: Check for a custom cell renderer */}
+									{column.cell ? (
+										column.cell({ row })
+									) : (
+										<div className="text-sm text-gray-900">{row[column.accessorKey]}</div>
+									)}
 								</td>
 							))}
 						</tr>

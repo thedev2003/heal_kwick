@@ -5,11 +5,10 @@ export const patientColumns = [
 	//...
 ];
 
-// New Appointment columns definition
 export const appointmentColumns = [
 	{
 		header: 'Patient Name',
-		accessorKey: 'patient.name', // Access nested data from the populated field
+		accessorKey: 'patient.name',
 	},
 	{
 		header: 'Reason',
@@ -18,11 +17,16 @@ export const appointmentColumns = [
 	{
 		header: 'Scheduled Date',
 		accessorKey: 'schedule',
-		cell: ({ row }) => new Date(row.original.schedule).toLocaleString(), // Custom cell renderer for formatting
+		cell: ({ row }) => new Date(row.original.schedule).toLocaleString(),
 	},
 	{
 		header: 'Status',
 		accessorKey: 'status',
+	},
+	{
+		header: 'Actions',
+		// We define a custom cell renderer for this column
+		cell: ({ row }) => <AppointmentActions appointment={row.original} />,
 	},
 ];
 
