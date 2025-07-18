@@ -1,50 +1,27 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { Button } from '@/components/ui/button';
+import { Stethoscope } from 'lucide-react';
+import Link from 'next/link';
 
-export default function Home() {
+export default function LandingPage() {
 	return (
-		<div className="min-h-screen flex flex-col">
-			<Header />
-
-			<main className="flex-grow container mx-auto px-4 py-8">
-				<section className="text-center mb-16">
-					<h1 className="text-4xl font-bold mb-4">
-						Welcome to Health Kwick
-					</h1>
-					<p className="text-xl text-gray-600 mb-8">
-						Modern Healthcare Management System
-					</p>
-					<div className="flex gap-4 justify-center">
-						<Link
-							href="/login"
-							className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
-						>
-							Login
-						</Link>
-						<Link
-							href="/register"
-							className="bg-white text-blue-600 border border-blue-600 px-6 py-2 rounded-lg hover:bg-blue-50"
-						>
-							Register
-						</Link>
-					</div>
-				</section>
-
-				<section className="grid md:grid-cols-3 gap-8">
-					{/* Feature cards */}
-					<div className="p-6 border rounded-lg">
-						<h3 className="font-bold mb-2">Easy Appointments</h3>
-						<p className="text-gray-600">
-							Schedule and manage appointments with ease
-						</p>
-					</div>
-					{/* Add more feature cards */}
-				</section>
-			</main>
-
-			<Footer />
+		<div className="flex flex-col items-center justify-center min-h-screen bg-background">
+			<div className="flex flex-col items-center p-8 space-y-6 bg-card rounded-lg shadow-lg border">
+				<div className="flex items-center text-primary">
+					<Stethoscope className="w-16 h-16" />
+					<h1 className="ml-4 text-5xl font-bold">Heal Kwick</h1>
+				</div>
+				<p className="text-lg text-muted-foreground">
+					Your modern solution for health and appointment management.
+				</p>
+				<div className="flex space-x-4">
+					<Button asChild>
+						<Link href="/login">Login</Link>
+					</Button>
+					<Button asChild variant="secondary">
+						<Link href="/register">Register</Link>
+					</Button>
+				</div>
+			</div>
 		</div>
 	);
 }
