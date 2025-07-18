@@ -1,20 +1,20 @@
 import { LoginForm } from '@/components/auth/LoginForm';
 import AuthLayout from '@/components/layout/AuthLayout';
+import { CardFooter } from '@/components/ui/card';
 import Link from 'next/link';
 
 export default function LoginPage() {
 	return (
 		<AuthLayout>
-			<div className="text-center">
-				<h1 className="text-2xl font-bold">Welcome Back</h1>
-				<p className="text-gray-500">
+			<LoginForm />
+			<CardFooter className="justify-center">
+				<p className="text-sm text-center text-muted-foreground">
 					Don&apos;t have an account?{' '}
-					<Link href="/register" className="text-blue-500 hover:underline">
+					<Link href="/register" className="font-medium text-primary hover:underline">
 						Sign up
 					</Link>
 				</p>
-			</div>
-			<LoginForm />
+			</CardFooter>
 		</AuthLayout>
 	);
 }

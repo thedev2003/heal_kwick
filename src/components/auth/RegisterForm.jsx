@@ -2,6 +2,10 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export function RegisterForm() {
 	const [name, setName] = useState('');
@@ -25,7 +29,7 @@ export function RegisterForm() {
 			});
 
 			if (res.ok) {
-				router.push('/login'); // Redirect to login page after successful registration
+				router.push('/login');
 			} else {
 				const data = await res.json();
 				setError(data.message || 'Registration failed.');
@@ -38,16 +42,35 @@ export function RegisterForm() {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} className="space-y-4">
-			{/* We will replace these with shadcn/ui components later */}
-			<input type="text" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} required className="w-full px-3 py-2 border rounded-md" />
-			<input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required className="w-full px-3 py-2 border rounded-md" />
-			<input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full px-3 py-2 border rounded-md" />
-			<input type="tel" placeholder="Phone Number (Optional)" value={phone} onChange={(e) => setPhone(e.target.value)} className="w-full px-3 py-2 border rounded-md" />
-			<button type="submit" disabled={isLoading} className="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-md hover:bg-blue-600 disabled:bg-gray-400">
-				{isLoading ? 'Registering...' : 'Register'}
-			</button>
-			{error && <p className="text-sm text-center text-red-500">{error}</p>}
-		</form>
+		<Card>
+			<CardHeader>
+				<CardTitle>Create an Account</CardTitle>
+				<CardDescription>Enter your details below to register.</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<form onSubmit={handleSubmit} className="space-y-4">
+					<div className="space-y-2">
+						<Label htmlFor="name">Full Name</Label>
+						<Input id="name" type="text" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} required />
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="email">Email</Label>
+						<Input id="email" type="email" placeholder="m@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="password">Password</Label>
+						<Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+					</div>
+					<div className="space-y-2">
+						<Label htmlFor="phone">Phone (Optional)</Label>
+						<Input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+					</div>
+					<Button type="submit" disabled={isLoading} className="w-full">
+						{isLoading ? 'Registering...' : 'Create Account'}
+					</Button>
+					{error && <p className="text-sm text-center text-destructive">{error}</p>}
+				</form>
+			</CardContent>
+		</Card>
 	);
 }
